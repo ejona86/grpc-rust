@@ -25,8 +25,9 @@
 use std::marker::PhantomData;
 use std::pin::Pin;
 
-use grpc::Status;
-use grpc::StatusOr;
+use crate::Status;
+use crate::StatusOr;
+use crate::trailers_conv::status_from_trailers;
 use grpc::client::CallOptions;
 use grpc::client::InvokeOnce;
 use grpc::client::RecvStream;
@@ -169,7 +170,7 @@ where
         loop {
             let i = rx.recv(&mut res).await;
             if let ResponseStreamItem::Trailers(t) = i {
-                return t.into_status();
+                return status_from_trailers(t);
             }
         }
     }
