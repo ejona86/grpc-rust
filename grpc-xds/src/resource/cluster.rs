@@ -266,16 +266,16 @@ fn validate_aggregate_discovery(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::generated::envoy::config::cluster::v3::cluster::CustomClusterType;
-    use crate::generated::envoy::config::cluster::v3::cluster::EdsClusterConfig;
-    use crate::generated::envoy::config::core::v3::Address;
-    use crate::generated::envoy::config::core::v3::AggregatedConfigSource;
-    use crate::generated::envoy::config::core::v3::ConfigSource;
-    use crate::generated::envoy::config::core::v3::SocketAddress;
-    use crate::generated::envoy::config::endpoint::v3::ClusterLoadAssignment;
-    use crate::generated::envoy::config::endpoint::v3::Endpoint;
-    use crate::generated::envoy::config::endpoint::v3::LbEndpoint;
-    use crate::generated::envoy::config::endpoint::v3::LocalityLbEndpoints;
+    use crate::generated::envoy_config_cluster_v3_cluster_proto::cluster::CustomClusterType;
+    use crate::generated::envoy_config_cluster_v3_cluster_proto::cluster::EdsClusterConfig;
+    use crate::generated::envoy_config_core_v3_address_proto::Address;
+    use crate::generated::envoy_config_core_v3_address_proto::SocketAddress;
+    use crate::generated::envoy_config_core_v3_config_source_proto::AggregatedConfigSource;
+    use crate::generated::envoy_config_core_v3_config_source_proto::ConfigSource;
+    use crate::generated::envoy_config_endpoint_v3_endpoint_components_proto::Endpoint;
+    use crate::generated::envoy_config_endpoint_v3_endpoint_components_proto::LbEndpoint;
+    use crate::generated::envoy_config_endpoint_v3_endpoint_components_proto::LocalityLbEndpoints;
+    use crate::generated::envoy_config_endpoint_v3_endpoint_proto::ClusterLoadAssignment;
     use protobuf::Serialize;
     use protobuf_well_known_types::Any;
 

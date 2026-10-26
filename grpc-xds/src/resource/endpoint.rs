@@ -316,12 +316,12 @@ impl EndpointsResource {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::generated::envoy::config::core::v3::Address;
-    use crate::generated::envoy::config::core::v3::Locality as EnvoyLocality;
-    use crate::generated::envoy::config::core::v3::SocketAddress;
-    use crate::generated::envoy::config::endpoint::v3::Endpoint;
-    use crate::generated::envoy::config::endpoint::v3::LbEndpoint as EnvoyLbEndpoint;
-    use crate::generated::envoy::config::endpoint::v3::LocalityLbEndpoints as EnvoyLocalityLbEndpoints;
+    use crate::generated::envoy_config_core_v3_address_proto::Address;
+    use crate::generated::envoy_config_core_v3_address_proto::SocketAddress;
+    use crate::generated::envoy_config_core_v3_base_proto::Locality as EnvoyLocality;
+    use crate::generated::envoy_config_endpoint_v3_endpoint_components_proto::Endpoint;
+    use crate::generated::envoy_config_endpoint_v3_endpoint_components_proto::LbEndpoint as EnvoyLbEndpoint;
+    use crate::generated::envoy_config_endpoint_v3_endpoint_components_proto::LocalityLbEndpoints as EnvoyLocalityLbEndpoints;
     use protobuf::Serialize;
     use protobuf_well_known_types::UInt32Value;
 

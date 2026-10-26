@@ -232,7 +232,7 @@ mod tests {
     use std::panic::catch_unwind;
 
     use super::*;
-    use crate::generated::envoy::r#type::matcher::v3::StringMatcher as EnvoyStringMatcher;
+    use crate::generated::envoy_type_matcher_v3_string_proto::StringMatcher as EnvoyStringMatcher;
 
     fn proto(
         kind: &str,
