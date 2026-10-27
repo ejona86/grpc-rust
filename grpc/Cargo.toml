@@ -46,6 +46,7 @@ _runtime-tokio = [
 # to be able to do its checks.
 tower = ["_runtime-tokio"]
 __unstable = []
+__internal = []
 gzip = ["dep:flate2"]
 
 [dependencies]
@@ -83,6 +84,7 @@ tower = { version = "0.5.2", features = [
 tower-service = "0.3.3"
 trait-variant = "0.1.2"
 url = "2.5.0"
+futures = "0.3.34"
 
 [dev-dependencies]
 h2 = "0.4"

@@ -74,7 +74,7 @@ pub use tonic::async_trait;
 #[cfg(feature = "__unstable")]
 #[doc(hidden)]
 pub mod __unstable {
-    pub use crate::private::Internal;
+    pub use crate::private::UnstableToken;
 
     pub mod rt {
         pub use crate::rt::*;
@@ -103,13 +103,45 @@ pub mod __unstable {
     }
 }
 
+#[cfg(feature = "__internal")]
+#[doc(hidden)]
+pub mod __internal {
+    pub use private::InternalToken;
+}
+
+/// These private types are only intended to be used in exported traits, where
+/// the trait must be exposed for direct use, but we need to put some
+/// restrictions on the trait. Prefer to use 'pub use' in __unstable or
+/// __internal instead of using this.
+///
+/// For functions and struct methods, instead of using this, forwarding
+/// functions are added to __unstable or __internal.
+///
+/// For structs and enums, instead of using this, 'pub use' is added to
+/// __unstable or __internal.
 mod private {
-    /// A zero-sized type used to seal methods on a public trait.
-    ///
-    /// Because this type is private to this crate, it cannot be constructed or
-    /// named by external crates. As a result, any method requiring an `Internal`
-    /// argument becomes uncallable from outside the crate.
-    pub struct Internal;
+    /// A zero-sized type used so only the grpc crate can call or implement
+    /// methods with this argument. It is private to this crate.
+    pub struct SealedToken;
+    /// A trait used so only the grpc crate can implement subtraits. The
+    /// subtraits are unrestricted for consumers.
+    pub trait SealedTrait {}
+
+    /// A zero-sized type used when only grpc-authored crates should call or
+    /// implement methods with this argument.
+    /// A zero-sized type used to mark internal methods on a public trait.
+    /// Internal methods should only be implemented and called by grpc-authored
+    /// crates.
+    pub struct InternalToken;
+    pub trait InternalTrait {}
+
+    /// A zero-sized type used to mark unstable methods on a public trait.
+    /// Unstable methods do not have any stability guarantees, and thus are
+    /// generally not safe to use from libraries since libraries should not
+    /// require a specific version of the grpc crate.
+    pub struct UnstableToken;
+    /// We reserve the right to add methods subtraits.
+    pub trait UnstableTrait {}
 }
 
 #[cfg(test)]
