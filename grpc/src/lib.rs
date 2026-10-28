@@ -106,7 +106,7 @@ pub mod __unstable {
 #[cfg(feature = "__internal")]
 #[doc(hidden)]
 pub mod __internal {
-    pub use private::InternalToken;
+    pub use crate::private::InternalToken;
 }
 
 /// These private types are only intended to be used in exported traits, where
