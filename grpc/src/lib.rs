@@ -120,27 +120,44 @@ pub mod __internal {
 /// For structs and enums, instead of using this, 'pub use' is added to
 /// __unstable or __internal.
 mod private {
-    /// A zero-sized type used so only the grpc crate can call or implement
-    /// methods with this argument. It is private to this crate.
+    /// A zero-sized type used on an exported trait so only the grpc crate can
+    /// call or implement methods with this argument. These methods may be
+    /// modified or deleted. The type is private to this crate.
     pub struct SealedToken;
-    /// A trait used so only the grpc crate can implement subtraits. The
-    /// subtraits are unrestricted for consumers.
+    /// A trait used on an exported subtrait so only the grpc crate can
+    /// implement the subtrait and methods may be added. The type is private to
+    /// this crate. The subtraits are unrestricted for consumers.
+    ///
+    /// This trait does not imply that methods may be modified or deleted.
+    /// [`SealedToken`] must be used in addition to this trait to denote sealed
+    /// methods.
     pub trait SealedTrait {}
 
-    /// A zero-sized type used when only grpc-authored crates should call or
-    /// implement methods with this argument.
-    /// A zero-sized type used to mark internal methods on a public trait.
-    /// Internal methods should only be implemented and called by grpc-authored
-    /// crates.
+    /// A zero-sized type used on an exported trait where only grpc-authored
+    /// crates should call or implement methods with this argument. These
+    /// methods may be modified or deleted.
     pub struct InternalToken;
+    /// A trait used on an exported subtrait where only grpc-authored crate
+    /// should implement the subtrait and methods may be added. The subtraits
+    /// are unrestricted for consumers.
+    ///
+    /// This trait does not imply that methods may be modified or deleted.
+    /// [`InternalToken`] must be used in addition to this trait to denote
+    /// internal methods.
     pub trait InternalTrait {}
 
-    /// A zero-sized type used to mark unstable methods on a public trait.
-    /// Unstable methods do not have any stability guarantees, and thus are
-    /// generally not safe to use from libraries since libraries should not
-    /// require a specific version of the grpc crate.
+    /// A zero-sized type used on an exported trait for methods which may be
+    /// modified or deleted. Unstable methods are generally not safe to use from
+    /// libraries since libraries should not require a specific version of the
+    /// grpc crate.
     pub struct UnstableToken;
-    /// We reserve the right to add methods subtraits.
+    /// A trait used on an exported subtrait where methods may be added.
+    /// Unstable subtraits are generally not safe to implement from libraries
+    /// since libraries should not require a specific version of the grpc crate.
+    ///
+    /// This trait does not imply that methods may be modified or deleted.
+    /// [`UnstableToken`] must be used in addition to this trait to denote
+    /// unstable methods.
     pub trait UnstableTrait {}
 }
 
