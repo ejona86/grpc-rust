@@ -65,6 +65,10 @@ mod xds_config;
 /// `grpc` crate based [`xds_client::Transport`] implementation.
 mod transport;
 
+/// Process-wide pool of [`xds_client::XdsClient`]s shared by channels with the
+/// same target.
+mod client_pool;
+
 #[cfg(test)]
 mod tests {
     //! Sanity checks that the generated xDS modules are importable and usable
